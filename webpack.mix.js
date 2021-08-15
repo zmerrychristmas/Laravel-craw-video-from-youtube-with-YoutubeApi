@@ -1,5 +1,15 @@
 const mix = require('laravel-mix');
-
+mix.webpackConfig(webpack => {
+    return {
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery',
+                'window.jQuery': 'jquery',
+            })
+        ]
+    };
+});
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
