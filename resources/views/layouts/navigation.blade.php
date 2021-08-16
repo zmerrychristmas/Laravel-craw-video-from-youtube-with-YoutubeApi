@@ -28,7 +28,7 @@
                             <strong>Welcome: </strong><span>{{ Auth::user()->email }}</span>
                         </div>
                         <div class="w-full md:w-auto px-3 mt-2">
-                            <a href="{{ route('movies.create') }}" class="g-white hover:bg-gray-100 text-gray-800 py-2 px-4  font-semibold btn border border-gray-400 rounded shadow">
+                            <a href="{{ route('movies.create') }}" id="share-movie-btn" class="g-white hover:bg-gray-100 text-gray-800 py-2 px-4  font-semibold btn border border-gray-400 rounded shadow">
                               Share a movies
                             </a>
                         </div>

@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-Use Exception;
-use App\Models\Movie;
-use Auth;
 use App\Http\Requests\MovieRequest;
+use App\Models\Movie;
+Use Exception;
+use Auth;
+use Youtube;
 
 class MovieController extends Controller
 {
@@ -30,7 +31,32 @@ class MovieController extends Controller
     public function store(MovieRequest $request)
     {
         $url = $request->url_link;
-        $ids = $this->getYoutubeId($url);
+        $ids = Youtube::getYoutubeIDs($url);
+        if (!empty($ids)) {
+            $video_id = $ids[0];
+            $data = [];
+            try {
+                $data = Youtube::getVideoDetail($video_id);
+                $data['user_id'] = Auth::user()->id;
+                $data['url_link'] = $request->url_link;
+                $movie = Movie::create($data);
+            } catch (Exception $ex) {
+                return redirect()->back()
+                    ->withErrors(['Youtube url is wrong format.'])
+                    ->withInput();            }
+        } else {
+            return redirect()->back()
+                ->withErrors(['Youtube url is wrong format.'])
+                ->withInput();
+        }
+        // Output title
+        return redirect()->back()->with('success', 'Movie success added!');
+    }
+
+    public function store2(MovieRequest $request)
+    {
+        $url = $request->url_link;
+        $ids = Youtube::getYoutubeIDs($url);
         if (!empty($ids)) {
             $api_key = "AIzaSyBp7QOR_Wcx9ffTrue0usCBCglt-JpjbVo";
             $video_id = $ids[0];
@@ -51,6 +77,10 @@ class MovieController extends Controller
                 return redirect()->back()
                     ->withErrors(['Youtube url is wrong format.'])
                     ->withInput();            }
+        } else {
+            return redirect()->back()
+                ->withErrors(['Youtube url is wrong format.'])
+                ->withInput();
         }
         // Output title
         return redirect()->back()->with('success', 'Movie success added!');
