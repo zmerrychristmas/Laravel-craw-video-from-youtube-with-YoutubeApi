@@ -5,7 +5,7 @@ I Create a simple website allow users can:
  - if not register, visitor can watch video from youtube
  - member can up vote and down vote video
  - Youtube Facade integration with Youtube APIv3
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pq0eaXWzyLw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Laravel itegration with YoutubeApi](https://img.youtube.com/vi/pq0eaXWzyLw/0.jpg)](https://www.youtube.com/watch?v=pq0eaXWzyLw)
 ## reference
 - [Laravel 8](https://laravel.com/)
 - [Laravel Breeze](https://github.com/laravel/breeze)
